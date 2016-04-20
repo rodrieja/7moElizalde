@@ -8,9 +8,9 @@ namespace AdivinaNumero
 {
     enum Opciones
     {
-        MostrarAyuda,
         IntentarNuevamente,
-        Rendirse,
-        MostrarMejorPuntaje
+        MostrarAyuda,
+        MostrarMejorPuntaje,
+        Rendirse
     }
 }
