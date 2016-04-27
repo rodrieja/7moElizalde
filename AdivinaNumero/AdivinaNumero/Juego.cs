@@ -42,7 +42,7 @@ namespace AdivinaNumero
 
         internal void MostrarMejorPuntaje()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("MEJOR PUNTAJE {0}: {1}", prop.NombreRecord, prop.PuntajeRecord);
         }
 
         internal bool AdivinarNumero(Jugador j)
