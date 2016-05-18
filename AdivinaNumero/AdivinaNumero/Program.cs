@@ -11,46 +11,55 @@ namespace AdivinaNumero
         static void Main(string[] args)
         {
             Juego juego = new Juego();
-            Jugador jugador = new Jugador();
-
+            
             juego.InicializarJuego();
-            juego.ComenzarJuego(jugador);
+            juego.ComenzarJuego();
 
-            bool continuar = true;
+            bool finalizar = juego.AdivinarNumero();
             int opcion;
 
-            while (continuar)
+            if (finalizar)
+            {
+                Console.WriteLine("FELICITACIONES. ACERTASTE EN EL PRIMER INTENTO...");
+            }
+
+            while (!finalizar)
             {
                 opcion = juego.SeleccionarOpcion();
                 switch (opcion)
                 {
-                    case (int)Opciones.MostrarAyuda:
+                    case (int)Enumeracion.Opciones.MostrarAyuda:
                         juego.MostrarAyuda();
                         break;
-                    case (int)Opciones.MostrarMejorPuntaje:
+                    case (int)Enumeracion.Opciones.MostrarMejorPuntaje:
                         juego.MostrarMejorPuntaje();
                         break;
-                    case (int)Opciones.Rendirse:
-                        continuar = false;
+                    case (int)Enumeracion.Opciones.Rendirse:
+                        finalizar = true;
                         break;
-                    case (int)Opciones.IntentarNuevamente:
-                        continuar = juego.AdivinarNumero(jugador);
+                    case (int)Enumeracion.Opciones.IntentarNuevamente:
+                        finalizar = juego.AdivinarNumero();
                         break;
                     default:
                         break;
                 }
 
-                if (!continuar)
+                if (finalizar)
                 {
+                    juego.RegistrarPuntaje();
+
                     Console.WriteLine("Desea volver a Jugar? (SI/NO)");
                     if (Console.ReadLine().ToUpper() == "SI")
                     {
-                        continuar = true;
-                        juego.Reiniciar(jugador);
+                        finalizar = false;
+                        juego.Reiniciar();
                     }
                 }
             }
 
+            juego.Finalizar();
+
+            Console.WriteLine("Presione una tecla para continuar...");
             Console.ReadKey();
         }
     }
